@@ -5,7 +5,7 @@ let isMapDrawn = false;
 let userLatitude;
 let userLongtitude;
 
-console.log(locationMap);
+// console.log(locationMap);
 
 const drawMap = (latitude, longtitude) => {
     const options = {
@@ -16,15 +16,23 @@ const drawMap = (latitude, longtitude) => {
     map.setZoomable(false);
 }
 
+const deleteMarkers = () => {
+    for(let i = 0; i < markers.length; i++){
+        markers[i].setMap(null);
+    }
+    markers = [];
+}
+
 const addUserMarker = () => {
     let markerImage = "/file/map_not_done.png";
     let markerSize = new kakao.maps.Size(24, 35);
 
-    // const image = new kakao.maps.MarkerImage(markerImage, markerSize);
+    const image = new kakao.maps.MarkerImage(markerImage, markerSize);
     let marker = new kakao.maps.Marker({
         map : map,
         position : new kakao.maps.LatLng(userLatitude, userLongtitude),
-        // image : image
+        title : '내 현재 위치',
+        image : image
     });
     markers.push(marker);
 }
@@ -46,6 +54,8 @@ const addCourseMarker = () => {
 const configurationLocationWatch = () => {
     if(navigator.geolocation){
         navigator.geolocation.watchPosition((position) => {
+            deleteMarkers();
+
             userLatitude = position.coords.latitude;
             userLongtitude = position.coords.longitude;
 
