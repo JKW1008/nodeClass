@@ -1,3 +1,6 @@
+import "dotenv/config";
+import "regenerator-runtime";
+
 import express from "express";
 import viewRouter from "./router/viewRouter";
 import apiRouter from "./router/apiRouter";
