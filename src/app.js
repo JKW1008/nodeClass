@@ -31,6 +31,9 @@ app.set("views", process.cwd() + "/src/client/html");
  * 주소 : /api/**  api 만 전달해주는 router apiRouter -> 데이터만 전달해주는 router
  */
 
+// json 데이터  parse midle ware
+app.use(express.json());
+
 app.use("/css", express.static("src/client/css"));
 app.use("/js", express.static("src/client/js"));
 app.use("/file", express.static("src/client/file"));

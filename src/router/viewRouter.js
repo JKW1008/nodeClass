@@ -17,7 +17,7 @@ viewRouter.get("/login", loginViewController);
 viewRouter.get("/join", joinViewController);
 viewRouter.get("/profile", profileViewController);
 viewRouter.get("/qr", qrViewController);
-viewRouter.get("/course", courseViewController);
+viewRouter.get("/courses", courseViewController);
 viewRouter.get("/introduce", introduceViewController);
 viewRouter.get("/", homeViewController);
 
