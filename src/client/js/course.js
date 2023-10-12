@@ -1,3 +1,14 @@
+const msgAlert = (position, message, type) => {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: position,
+        showConfirmButton: false,
+        timer: 2000,
+    });
+
+    Toast.fire({ title: message, icon: type });
+}
+
 const locationMap = document.querySelector("#location-map");
 let map; 
 let markers = [];
@@ -142,8 +153,25 @@ const afterGetCourseList = () => {
 
 //  백엔드 서버로 코스정보 요청
 const getCourseListFetch = async () => {
-    const response = await fetch("/api/courses")
-    console.log(response);
+    const accessToken = localStorage.getItem("accessToken");
+    if(!accessToken){
+        msgAlert("top", "로그인이 필요합니다.", "error");
+        setTimeout(() => {
+            window.location.href = "/login?error=need_login";
+        }, 1000);
+    }
+
+    const response = await fetch("/api/courses", {
+        headers: {
+            Authorization : `Bearer ${accessToken}`
+        }
+    })
+    if(response.status == 401){
+        msgAlert("top", "로그인이 필요합니다.", "error");
+        return setTimeout(() => {
+            window.location.href = "/login?error=need_login";
+        }, 1000);
+    }
 
     const result = await response.json();
     courseListInfo = result;

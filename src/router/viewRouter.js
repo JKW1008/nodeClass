@@ -6,6 +6,7 @@ import {
   homeViewController,
   introduceViewController,
   joinViewController,
+  loginCallbackController,
   loginViewController,
   profileViewController,
   qrViewController,
@@ -20,5 +21,6 @@ viewRouter.get("/qr", qrViewController);
 viewRouter.get("/courses", courseViewController);
 viewRouter.get("/introduce", introduceViewController);
 viewRouter.get("/", homeViewController);
+viewRouter.get("/login/callback", loginCallbackController);
 
 export default viewRouter;
